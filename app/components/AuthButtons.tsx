@@ -14,24 +14,18 @@ export default function AuthButtons() {
     <div className="flex items-center gap-4">
       <SignedOut>
         <SignInButton>
-          <button className="bg-[#6c47ff] text-white rounded-full px-4 h-10">
-            Sign In
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Sign Up
           </button>
         </SignInButton>
       </SignedOut>
 
       <SignedIn>
-        {/* Option A: User avatar dropdown (recommended) */}
-        <UserButton />
-
-        {/* Option B: Explicit Sign Out button (optional) */}
-        {/* 
-        <SignOutButton>
-          <button className="text-sm text-gray-600 hover:text-black">
+          <SignOutButton>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Sign Out
           </button>
         </SignOutButton> 
-        */}
       </SignedIn>
     </div>
   );
