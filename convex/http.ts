@@ -43,8 +43,23 @@ http.route({
     }
     const eventType = evt.type;
 
-    if(eventType == "user.created") {
-        
+    if (eventType == "user.created") {
+      const { id, email_addresses, first_name, last_name } = evt.data;
+
+      const email = email_addresses[0].email_address;
+
+      const name = `${first_name || ""} ${last_name || ""}`.trim();
+
+      try {
+
+
+      } catch (error) {
+        return new Response("Error creating user", { status: 500 });
+      }
     }
+
+    return new Response("Webhook proccesed successfuly", { status: 200 });
   }),
 });
+
+export default http
