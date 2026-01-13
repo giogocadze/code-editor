@@ -1,11 +1,6 @@
 import React from 'react'
 
-const LanguageSelector = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
+    return <div>dsadas</div>
 }
-
 export default LanguageSelector
