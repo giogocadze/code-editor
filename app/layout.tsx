@@ -5,6 +5,7 @@ import "./globals.css";
 
 import AuthButtons from "./components/AuthButtons/AuthButtons";
 import ConvexClientProvider from "./components/providers/ConvexClienProvider";
+import Footer from "./components/Footer/Footer";
 
 
 const geistSans = Geist({
@@ -31,15 +32,16 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable}
+          antialiased min-h-screen bg-linear-to-b from-gray-900 to-gray-950
+          text-gray-100 flex flex-col`}
         >
-          <header className="flex items-center p-4 h-16">
-            <AuthButtons />
-          </header>
-
-          <ConvexClientProvider>
-            {children}
-          </ConvexClientProvider>
+          <div>
+            <ConvexClientProvider>
+              {children}
+            </ConvexClientProvider>
+          </div>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
