@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import AuthButtons from "./components/AuthButtons";
+import AuthButtons from "./components/AuthButtons/AuthButtons";
 import ConvexClientProvider from "./components/providers/ConvexClienProvider";
 
 
