@@ -1,5 +1,6 @@
+import { Theme } from "@/app/types";
 import { Monaco } from "@monaco-editor/react";
-import { Theme } from "../../../types";
+
 
 type LanguageConfig = Record<
   string,
@@ -18,7 +19,7 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
     id: "javascript",
     label: "JavaScript",
     logoPath: "/javascript.png",
-    pistonRuntime: { language: "javascript", version: "18.15.0" }, // api that we're gonna be using
+    pistonRuntime: { language: "javascript", version: "18.15.0" }, 
     monacoLanguage: "javascript",
     defaultCode: `// JavaScript Playground
 const numbers = [1, 2, 3, 4, 5];
