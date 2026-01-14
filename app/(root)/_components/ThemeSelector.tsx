@@ -3,9 +3,18 @@ import { useCodeEditorStore } from '@/app/store/useCreateStore'
 import React, { useEffect, useRef, useState } from 'react'
 import { THEMES } from '../_constants'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CircleOff, Palette } from 'lucide-react'
+import { CircleOff, Cloud, Github, Laptop, Moon, Palette, Sun } from 'lucide-react'
 
-const ThemeSelector = () => {
+
+const THEME_ICONS: Record<string, React.ReactNode> = {
+    "vs-dark": <Moon className="size-4" />,
+    "vs-light": <Sun className="size-4" />,
+    "github-dark": <Github className="size-4" />,
+    monokai: <Laptop className="size-4" />,
+    "solarized-dark": <Cloud className="size-4" />,
+};
+
+function ThemeSelector() {
 
 
     const [isOpen, setIsOpen] = useState(false)
@@ -30,7 +39,7 @@ const ThemeSelector = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-42 group relative flex items-center gap-2 px-4 py-2.5 bg-[#1e1e2e]/80 hover:bg-[#262637] 
+                className="w-48 group relative flex items-center gap-2 px-4 py-2.5 bg-[#1e1e2e]/80 hover:bg-[#262637] 
         rounded-lg transition-all duration-200 border border-gray-800/50 hover:border-gray-700"
             >
                 <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 to-purple-500/5 
@@ -96,7 +105,7 @@ const ThemeSelector = () => {
                                     style={{ background: t.color }}
                                 />
 
-                        
+
                                 {theme === t.id && (
                                     <motion.div
                                         className="absolute inset-0 border-2 border-blue-500/30 rounded-lg"
