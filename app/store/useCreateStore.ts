@@ -22,7 +22,7 @@ const getInitialState = (): Pick<
   };
 };
 
-export const useCodeEditorState = create<CodeEditorState>((set, get) => {
+export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
   const initialState = getInitialState();
 
   return {
@@ -37,7 +37,6 @@ export const useCodeEditorState = create<CodeEditorState>((set, get) => {
 
     setEditor: (editor: Monaco) => {
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
-
       if (savedCode) editor.setValue(savedCode);
       set({ editor });
     },
@@ -65,6 +64,10 @@ export const useCodeEditorState = create<CodeEditorState>((set, get) => {
         output: "",
         error: null,
       });
+    },
+
+    runCode: async () => {
+    
     },
   };
 });
