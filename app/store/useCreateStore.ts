@@ -3,9 +3,11 @@ import { LANGUAGE_CONFIG } from "../(root)/_constants";
 import { Monaco } from "@monaco-editor/react";
 import { CodeEditorState } from "@/app/types";
 
-const getInitialState = () => {
-  // if server return default value
-  if (typeof window == "undefined") {
+const getInitialState = (): Pick<
+  CodeEditorState,
+  "language" | "theme" | "fontSize"
+> => {
+  if (typeof window === "undefined") {
     return {
       language: "javascript",
       fontSize: 16,
@@ -13,15 +15,13 @@ const getInitialState = () => {
     };
   }
 
-  const savedLanguage = localStorage.getItem("editor-language") || "javascript";
-  const savedTheme = localStorage.getItem("editor-theme") || "vs-dark";
-  const savedFontSize = localStorage.getItem("editor-font-size") || 16;
   return {
-    language: savedLanguage,
-    theme: savedTheme,
-    fontSize: Number(savedFontSize),
+    language: localStorage.getItem("editor-language") ?? "javascript",
+    theme: localStorage.getItem("editor-theme") ?? "vs-dark",
+    fontSize: Number(localStorage.getItem("editor-font-size") ?? 16),
   };
 };
+
 export const useCodeEditorState = create<CodeEditorState>((set, get) => {
   const initialState = getInitialState();
 
