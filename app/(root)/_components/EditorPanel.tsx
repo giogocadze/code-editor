@@ -26,13 +26,17 @@ const EditorPanel = () => {
   useEffect(() => {
     const savedFontSize = localStorage.getItem("editor-font-size")
     if (savedFontSize) setFontSize(parseInt(savedFontSize))
-  })
+  }, [setFontSize])
 
   const handleRefresh = () => { }
   const handleEditorChange = () => { }
-  const handleFontSizeChange = (newSize: number) => { }
+  const handleFontSizeChange = (newSize: number) => {
+    const size = Math.min(Math.max(newSize, 12), 24)
+    setFontSize(size)
+    localStorage.setItem("editor-font-size", size.toString())
+  }
 
-  if (!mounted) return null 
+  if (!mounted) return null
   return (
     <div className='relative' >
       <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/5 p-6">
