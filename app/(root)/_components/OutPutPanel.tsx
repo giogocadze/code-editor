@@ -1,8 +1,9 @@
 "use client"
 
 import { useCodeEditorStore } from '@/app/store/useCreateStore'
-import { CheckCircle, Copy, Terminal } from 'lucide-react'
+import { AlertTriangle, CheckCircle, Copy, Terminal } from 'lucide-react'
 import { useState } from 'react'
+import RunningCodeSkeleton from './RunningCodeSkeleton'
 
 const OutPutPanel = () => {
 
@@ -50,6 +51,24 @@ const OutPutPanel = () => {
             )}
           </button>
         )}
+      </div>
+      <div className="relative" >
+        <div
+          className="relative bg-[#1e1e2e]/50 backdrop-blur-sm border border-[#313244] 
+        rounded-xl p-4 h-150 overflow-auto font-mono text-sm"
+        >
+          {isRunning ? (
+            <RunningCodeSkeleton />
+          ) : error ? (
+            <div className="flex items-start gap-3 text-red-400">
+            <AlertTriangle className="w-5 h-5 shrink-0 mt-1" />
+            <div className="space-y-1">
+              <div className="font-medium">Execution Error</div>
+              <pre className="whitespace-pre-wrap text-red-400/80">{error}</pre>
+            </div>
+          </div>
+          ) : ()}
+        </div>
       </div>
     </div>
   )
