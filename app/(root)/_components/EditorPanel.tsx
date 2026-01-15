@@ -23,18 +23,16 @@ const EditorPanel = () => {
     const newCode = savedCode || LANGUAGE_CONFIG[language].defaultCode
     if (editor) editor.setValue(newCode)
   }, [language, editor])
-  useEffect(() => {
-    const savedFontSize = localStorage.getItem("editor-font-size")
-    if (savedFontSize) setFontSize(parseInt(savedFontSize))
-  }, [setFontSize])
 
   const handleRefresh = () => { }
   const handleEditorChange = () => { }
+
+  
   const handleFontSizeChange = (newSize: number) => {
     const size = Math.min(Math.max(newSize, 12), 24)
     setFontSize(size)
-    localStorage.setItem("editor-font-size", size.toString())
   }
+
 
   if (!mounted) return null
   return (
