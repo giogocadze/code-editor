@@ -6,12 +6,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, Sparkles } from "lucide-react";
 import { Lock as LockIcon } from "lucide-react";
+import useMounted from "../hooks/useMounted";
 
 function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage } = useCodeEditorStore();
   const dropDownRef = useRef<HTMLDivElement>(null);
   const currentLanguageObj = LANGUAGE_CONFIG[language];
+  const mounted = useMounted()
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -33,6 +35,8 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
     setIsOpen(false);
   };
 
+  if (!mounted) return null
+
   return (
     <div className="relative" ref={dropDownRef}>
       <motion.button
@@ -45,7 +49,7 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
        ${!hasAccess && language !== "javascript" ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         <div
-          className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/5 
+          className="absolute inset-0 bg-linear -to-r from-blue-500/10 to-purple-500/5 
         rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
           aria-hidden="true"
         />
