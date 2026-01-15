@@ -15,19 +15,34 @@ const EditorPanel = () => {
   const clerk = useClerk()
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
   const mounted = useMounted()
+  const CODE_KEY = (language: string) => `editor-code-${language}`;
+
 
   const { language, theme, fontSize, editor, setEditor, setFontSize } = useCodeEditorStore()
 
   useEffect(() => {
-    const savedCode = localStorage.getItem(`editor-code${language}`)
-    const newCode = savedCode || LANGUAGE_CONFIG[language].defaultCode
-    if (editor) editor.setValue(newCode)
-  }, [language, editor])
+    if (!editor) return;
 
-  const handleRefresh = () => { }
-  const handleEditorChange = () => { }
+    const savedCode = localStorage.getItem(CODE_KEY(language));
+    editor.setValue(savedCode ?? LANGUAGE_CONFIG[language].defaultCode);
+  }, [language, editor]);
 
-  
+  const handleRefresh = () => {
+    const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
+
+    if (editor) editor.setValue(defaultCode);
+
+    localStorage.removeItem(CODE_KEY(language));
+  };
+
+  const handleEditorChange = (value: string | undefined) => {
+    if (value !== undefined) {
+      localStorage.setItem(CODE_KEY(language), value);
+    }
+  };
+
+
+
   const handleFontSizeChange = (newSize: number) => {
     const size = Math.min(Math.max(newSize, 12), 24)
     setFontSize(size)
