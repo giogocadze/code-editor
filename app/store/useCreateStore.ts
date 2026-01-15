@@ -80,7 +80,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
       try {
         const runtime = LANGUAGE_CONFIG[language].pistonRuntime;
 
-        const response = await fetch("https://emkc.org/v2/piston/execute", {
+        const response = await fetch("https://emkc.org/api/v2/piston/execute", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -100,11 +100,57 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         console.log("data back from piston", data);
 
         if (data.message) {
-          set({ error: data.message, executionResult: { code, output : "", error : data.message} });
-          return
+          set({
+            error: data.message,
+            executionResult: { code, output: "", error: data.message },
+          });
+          return;
         }
-        
-      } catch (error) {}
+        if (data.compile && data.compile.code !== 0) {
+          const error = data.compile.stderr || data.compile.output;
+          set({
+            error,
+            executionResult: {
+              code,
+              output: "",
+              error,
+            },
+          });
+          return;
+        }
+
+        if (data.run && data.run.code !== 0) {
+          const error = data.run.stderr || data.run.output;
+          set({
+            error,
+            executionResult: {
+              code,
+              output: "",
+              error,
+            },
+          });
+          return;
+        }
+
+        const output = data.run.output;
+        set({
+          output: output.trim(),
+          error: null,
+          executionResult: {
+            code,
+            output: output.trim(),
+            error: null,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+        set({
+          error: "Error running code",
+          executionResult: { code, output: "", error: "Error running code" },
+        });
+      } finally {
+        set({ isRunning: false });
+      }
     },
   };
 });
