@@ -6,9 +6,12 @@ import { motion } from 'framer-motion'
 import { RotateCcwIcon, ShareIcon, TypeIcon } from 'lucide-react'
 import Editor from "@monaco-editor/react";
 import Image from 'next/image'
+import { useClerk } from '@clerk/nextjs'
+import { EditorPanelSkeleton } from './EditorPanelSkeleton'
+
 
 const EditorPanel = () => {
-
+  const clerk = useClerk()
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
 
   const { language, theme, fontSize, editor, setEditor, setFontSize } = useCodeEditorStore()
@@ -81,7 +84,7 @@ const EditorPanel = () => {
         </div>
 
         <div className='relative group rounded-xl overflow-hidden ring-1 ring-white/5' >
-          <Editor
+          {clerk.loaded && <Editor
             height="600px"
             language={LANGUAGE_CONFIG[language].monacoLanguage}
             theme={theme}
@@ -110,10 +113,11 @@ const EditorPanel = () => {
               },
             }}
           />
-
-        </div>
+          }
+          {!clerk.loaded && <EditorPanelSkeleton />}
       </div>
     </div>
+    </div >
   )
 }
 
