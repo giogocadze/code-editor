@@ -84,17 +84,17 @@ const EditorPanel = () => {
           <Editor
             height="600px"
             language={LANGUAGE_CONFIG[language].monacoLanguage}
-            onChange={handleEditorChange}
             theme={theme}
             beforeMount={defineMonacoThemes}
-            onMount={(editor: string) => setEditor(editor)}
+            onMount={(editor) => setEditor(editor)}
+            onChange={handleEditorChange}
             options={{
               minimap: { enabled: false },
               fontSize,
               automaticLayout: true,
               scrollBeyondLastLine: false,
               padding: { top: 16, bottom: 16 },
-              renderWhiteSpace: "selection",
+              renderWhitespace: "selection",
               fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
               fontLigatures: true,
               cursorBlinking: "smooth",
@@ -110,6 +110,7 @@ const EditorPanel = () => {
               },
             }}
           />
+
         </div>
       </div>
     </div>
