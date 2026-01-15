@@ -8,11 +8,13 @@ import Editor from "@monaco-editor/react";
 import Image from 'next/image'
 import { useClerk } from '@clerk/nextjs'
 import { EditorPanelSkeleton } from './EditorPanelSkeleton'
+import useMounted from '../hooks/useMounted'
 
 
 const EditorPanel = () => {
   const clerk = useClerk()
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
+  const mounted = useMounted()
 
   const { language, theme, fontSize, editor, setEditor, setFontSize } = useCodeEditorStore()
 
@@ -29,6 +31,8 @@ const EditorPanel = () => {
   const handleRefresh = () => { }
   const handleEditorChange = () => { }
   const handleFontSizeChange = (newSize: number) => { }
+
+  if (!mounted) return null 
   return (
     <div className='relative' >
       <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/5 p-6">
@@ -115,8 +119,8 @@ const EditorPanel = () => {
           />
           }
           {!clerk.loaded && <EditorPanelSkeleton />}
+        </div>
       </div>
-    </div>
     </div >
   )
 }
