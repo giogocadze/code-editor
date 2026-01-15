@@ -1,9 +1,10 @@
 "use client"
 import { useCodeEditorStore } from '@/app/store/useCreateStore'
 import { useEffect, useState } from 'react'
-import { LANGUAGE_CONFIG } from '../_constants'
+import { defineMonacoThemes, LANGUAGE_CONFIG } from '../_constants'
 import { motion } from 'framer-motion'
 import { RotateCcwIcon, ShareIcon, TypeIcon } from 'lucide-react'
+import Editor from "@monaco-editor/react";
 import Image from 'next/image'
 
 const EditorPanel = () => {
@@ -24,7 +25,7 @@ const EditorPanel = () => {
 
   const handleRefresh = () => { }
   const handleEditorChange = () => { }
-  const handleFontSizeChange = (newSize : number) => { }
+  const handleFontSizeChange = (newSize: number) => { }
   return (
     <div className='relative' >
       <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/5 p-6">
@@ -77,6 +78,38 @@ const EditorPanel = () => {
               <span className="text-sm font-medium text-white ">Share</span>
             </motion.button>
           </div>
+        </div>
+
+        <div className='relative group rounded-xl overflow-hidden ring-1 ring-white/5' >
+          <Editor
+            height="600px"
+            language={LANGUAGE_CONFIG[language].monacoLanguage}
+            onChange={handleEditorChange}
+            theme={theme}
+            beforeMount={defineMonacoThemes}
+            onMount={(editor: string) => setEditor(editor)}
+            options={{
+              minimap: { enabled: false },
+              fontSize,
+              automaticLayout: true,
+              scrollBeyondLastLine: false,
+              padding: { top: 16, bottom: 16 },
+              renderWhiteSpace: "selection",
+              fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
+              fontLigatures: true,
+              cursorBlinking: "smooth",
+              smoothScrolling: true,
+              contextmenu: true,
+              renderLineHighlight: "all",
+              lineHeight: 1.6,
+              letterSpacing: 0.5,
+              roundedSelection: true,
+              scrollbar: {
+                verticalScrollbarSize: 8,
+                horizontalScrollbarSize: 8,
+              },
+            }}
+          />
         </div>
       </div>
     </div>
