@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import Link from 'next/link'
 import { Clock, Trash2, User } from 'lucide-react'
 import Image from 'next/image'
-import StarButton from './StarButton'
+import StarButton from '../../components/StarButton'
 import toast from 'react-hot-toast'
 
 

@@ -115,7 +115,7 @@ export const getSnippets = query({
   },
 });
 
-export const isSnipetStart = query({
+export const isSnippetStarred = query({
   args: { snippetId: v.id("snippets") },
 
   handler: async (ctx, args) => {

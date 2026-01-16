@@ -3,7 +3,7 @@
 import { api } from "@/convex/_generated/api"
 import { useQuery } from "convex/react"
 import { useState } from "react"
-import NavigationHeader from "../components/NavigationHeader/NavigationHeader"
+import NavigationHeader from "../components/NavigationHeader"
 import SnippetsPageSkeleton from "./_components/SnippetsPageSkeleton"
 import { AnimatePresence, motion } from "framer-motion"
 import { BookOpen, Grid, Layers, Search, Tag, X } from "lucide-react"

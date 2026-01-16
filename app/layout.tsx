@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import ConvexClientProvider from "./components/providers/ConvexClienProvider";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 
 
