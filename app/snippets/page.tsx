@@ -3,7 +3,7 @@
 import { api } from "@/convex/_generated/api"
 import { useQuery } from "convex/react"
 import { useState } from "react"
-import NavigationHeader from "./_components/NavigationHeader"
+import NavigationHeader from "../components/NavigationHeader/NavigationHeader"
 import SnippetsPageSkeleton from "./_components/SnippetsPageSkeleton"
 
 const page = () => {
