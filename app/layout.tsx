@@ -5,6 +5,7 @@ import "./globals.css";
 
 import ConvexClientProvider from "./components/providers/ConvexClienProvider";
 import Footer from "./components/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 
 const geistSans = Geist({
@@ -41,6 +42,7 @@ export default function RootLayout({
             </ConvexClientProvider>
           </div>
           <Footer />
+          <Toaster/>
         </body>
       </html>
     </ClerkProvider>
