@@ -5,8 +5,9 @@ import { useQuery } from "convex/react"
 import { useState } from "react"
 import NavigationHeader from "../components/NavigationHeader/NavigationHeader"
 import SnippetsPageSkeleton from "./_components/SnippetsPageSkeleton"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { BookOpen, Grid, Layers, Search, Tag, X } from "lucide-react"
+import SnippetCard from "./_components/SnippetCard"
 
 const page = () => {
 
@@ -34,7 +35,7 @@ const page = () => {
             snippet.userName.toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesLanguage = !selectedLanguage || snippet.language == selectedLanguage
-        return matchesSearch  && matchesLanguage
+        return matchesSearch && matchesLanguage
     })
 
     return (
@@ -151,6 +152,21 @@ const page = () => {
                         </div>
                     </div>
                 </div>
+
+                <motion.div
+                    className={`grid gap-6 ${view === "grid"
+                        ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                        : "grid-cols-1 max-w-3xl mx-auto"
+                        }`}
+                    layout
+                >
+                    <AnimatePresence mode="popLayout" >
+                        {filteredSnippets.map(snippet => (
+                            <SnippetCard key={snippet._id} snippet={snippet} />
+                        ))}
+                    </AnimatePresence>
+
+                </motion.div>
             </div>
         </div>
     )
