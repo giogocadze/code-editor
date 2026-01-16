@@ -1,23 +1,33 @@
-"use client"
+"use client";
 
-import { useCodeEditorStore } from "@/app/store/useCreateStore"
-import { useUser } from "@clerk/nextjs"
-import { motion } from "framer-motion"
-import { Loader2, Play } from "lucide-react"
+import { getExecutionResult, useCodeEditorStore } from "@/app/store/useCreateStore";
+import { api } from "@/convex/_generated/api";
 
-const RunButton = () => {
+import { useUser } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
+import { motion } from "framer-motion";
+import { Loader2, Play } from "lucide-react";
 
-  const { user } = useUser()
-  const { isRunning, runCode, language, executionResult } = useCodeEditorStore()
+
+function RunButton() {
+  const { user } = useUser();
+  const { runCode, language, isRunning } = useCodeEditorStore();
+  const saveExecution = useMutation(api.codeExecutions.saveExecutions);
 
   const handleRun = async () => {
-    await runCode()
+    await runCode();
+    const result = getExecutionResult();
 
-    if(user && executionResult) {
-      
+    if (user && result) {
+      await saveExecution({
+        language,
+        code: result.code,
+        output: result.output || undefined,
+        error: result.error || undefined,
+      });
     }
+  };
 
-  }
   return (
     <motion.button
       onClick={handleRun}
@@ -30,11 +40,9 @@ const RunButton = () => {
         focus:outline-none
       `}
     >
-      <div className="absolute inset-0 bg-linear-to-r
-         from-blue-600 to-blue-500 rounded-xl 
-         opacity-100 transition-opacity group-hover:opacity-90" />
+      <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-blue-500 rounded-xl opacity-100 transition-opacity group-hover:opacity-90" />
 
-      <div className="relative flex items-center gap-2.5" >
+      <div className="relative flex items-center gap-2.5">
         {isRunning ? (
           <>
             <div className="relative">
@@ -43,7 +51,6 @@ const RunButton = () => {
             </div>
             <span className="text-sm font-medium text-white/90">Executing...</span>
           </>
-
         ) : (
           <>
             <div className="relative flex items-center justify-center w-4 h-4">
@@ -56,7 +63,6 @@ const RunButton = () => {
         )}
       </div>
     </motion.button>
-  )
+  );
 }
-
-export default RunButton
+export default RunButton;
