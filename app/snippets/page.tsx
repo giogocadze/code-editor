@@ -23,6 +23,20 @@ const page = () => {
             </div>
         )
     }
+
+    const languages = [...new Set(snippets.map((s) => s.language))]
+    const popularLanguages = languages.slice(0, 5)
+
+    const filteredSnippets = snippets.filter(snippet => {
+        const matchesSearch =
+            snippet.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            snippet.language.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            snippet.userName.toLowerCase().includes(searchQuery.toLowerCase());
+
+        const matchesLanguage = !selectedLanguage || snippet.language == selectedLanguage
+        return matchesSearch  && matchesLanguage
+    })
+
     return (
         <div className="min-h-screen bg-[#0a0a0f]" >
             <NavigationHeader />
@@ -55,7 +69,7 @@ const page = () => {
                     </motion.p>
                 </div>
                 <div className="relative max-w-5xl mx-auto mb-12 space-y-6">
-                    {/* Search */}
+
                     <div className="relative group">
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                         <div className="relative flex items-center">
@@ -72,7 +86,7 @@ const page = () => {
                         </div>
                     </div>
 
-                    {/* Filters Bar */}
+
                     <div className="flex flex-wrap items-center gap-4">
                         <div className="flex items-center gap-2 px-4 py-2 bg-[#1e1e2e] rounded-lg ring-1 ring-gray-800">
                             <Tag className="w-4 h-4 text-gray-400" />
@@ -118,8 +132,8 @@ const page = () => {
                                 <button
                                     onClick={() => setView("grid")}
                                     className={`p-2 rounded-md transition-all ${view === "grid"
-                                            ? "bg-blue-500/20 text-blue-400"
-                                            : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
+                                        ? "bg-blue-500/20 text-blue-400"
+                                        : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
                                         }`}
                                 >
                                     <Grid className="w-4 h-4" />
@@ -127,8 +141,8 @@ const page = () => {
                                 <button
                                     onClick={() => setView("list")}
                                     className={`p-2 rounded-md transition-all ${view === "list"
-                                            ? "bg-blue-500/20 text-blue-400"
-                                            : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
+                                        ? "bg-blue-500/20 text-blue-400"
+                                        : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
                                         }`}
                                 >
                                     <Layers className="w-4 h-4" />
