@@ -11,6 +11,7 @@ import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 
 import { useCodeEditorStore } from "@/app/store/useCreateStore";
 import useMounted from "../hooks/useMounted";
+import ShareSnippetDialog from "./ShareSnippetDialog";
 
 function EditorPanel() {
   const clerk = useClerk();
@@ -139,6 +140,7 @@ function EditorPanel() {
           {!clerk.loaded && <EditorPanelSkeleton />}
         </div>
       </div>
+      {isShareDialogOpen && <ShareSnippetDialog onClose={() => setIsShareDialogOpen(false)}/>}
     </div>
   );
 }
