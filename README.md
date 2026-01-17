@@ -23,12 +23,12 @@ Built with a production-ready stack and designed for scalability, performance, a
 
 ## 🧱 Tech Stack
 
-- **Frontend**: Next.js 15, TypeScript
+- **Frontend**: Next.js, TypeScript
 - **Backend**: Convex
 - **Authentication**: Clerk
 - **Code Execution**: Piston API
 - **Payments**: LemonSqueezy
-- **Styling & UI**: Custom VSCode-inspired themes
+- **Styling & UI**: Tailwind CSS
 
 ---
 
