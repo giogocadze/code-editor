@@ -13,7 +13,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
 
   const comments = useQuery(api.snippets.getComments, { snippetId }) || [];
   const addComment = useMutation(api.snippets.addComment);
-  // const deleteComment = useMutation(api.snippets.deleteComment);
+  const deleteComment = useMutation(api.snippets.deleteComment);
   const handleSubmitComment = async (content: string) => {
     setIsSubmitting(true);
 
@@ -31,7 +31,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
     setDeletingCommentId(commentId);
 
     try {
-      // await deleteComment({ commentId });
+      await deleteComment({ commentId });
     } catch (error) {
       console.log("Error deleting comment:", error);
       toast.error("Something went wrong");

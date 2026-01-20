@@ -162,7 +162,23 @@ export const getComments = query({
     return comments;
   },
 });
+export const deleteComment = mutation({
+  args: { commentId: v.id("snippetComments") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
 
+    const comment = await ctx.db.get(args.commentId);
+    if (!comment) throw new Error("Comment not found");
+
+
+    if (comment.userId !== identity.subject) {
+      throw new Error("Not authorized to delete this comment");
+    }
+
+    await ctx.db.delete(args.commentId);
+  },
+});
 export const isSnippetStarred = query({
   args: { snippetId: v.id("snippets") },
 
