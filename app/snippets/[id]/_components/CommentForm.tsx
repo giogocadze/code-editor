@@ -1,5 +1,6 @@
 import { CodeIcon, SendIcon } from "lucide-react";
 import { useState } from "react";
+import CommentContent from "./CommentContent";
 
 interface CommentFormProps {
   onSubmit: (comment: string) => Promise<void>;
@@ -38,7 +39,10 @@ function CommentForm({ onSubmit, isSubmitting }: CommentFormProps) {
         </div>
 
         {isPreview ? (
-          <div className="min-h-[120px] p-4 text-[#e1e1e3">{comment}</div>
+
+          <div className="min-h-[120px] p-4 text-[#e1e1e3">
+            <CommentContent  content={content} />
+          </div>
         ) : (
           <textarea
             value={comment}
