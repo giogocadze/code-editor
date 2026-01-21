@@ -4,6 +4,7 @@ import { SignInButton, useUser } from '@clerk/nextjs';
 import { useMutation, useQuery } from 'convex/react';
 import { MessageSquare } from 'lucide-react';
 import { useState } from 'react';
+import Comment from "./Comment"
 import toast from 'react-hot-toast';
 
 
@@ -51,7 +52,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
       </div>
       <div className="p-6 sm:p-8">
         {user ? (
-          <div> </div>
+          "comment form"
         ) : (
           <div className="bg-[#0a0a0f] rounded-xl p-6 text-center mb-8 border border-[#ffffff0a]">
             <p className="text-[#808086] mb-4">Sign in to join the discussion</p>
@@ -62,6 +63,18 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
             </SignInButton>
           </div>
         )}
+
+        <div className="space-y-6">
+          {comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+              isDeleting={deletinCommentId === comment._id}
+              currentUserId={user?.id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
