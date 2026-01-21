@@ -6,6 +6,7 @@ import { MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import Comment from "./Comment"
 import toast from 'react-hot-toast';
+import CommentForm from './CommentForm';
 
 
 function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
@@ -52,7 +53,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
       </div>
       <div className="p-6 sm:p-8">
         {user ? (
-          "comment form"
+          <CommentForm onSubmit={handleSubmitComment} isSubmitting={isSubmitting} />
         ) : (
           <div className="bg-[#0a0a0f] rounded-xl p-6 text-center mb-8 border border-[#ffffff0a]">
             <p className="text-[#808086] mb-4">Sign in to join the discussion</p>
