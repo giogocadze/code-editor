@@ -1,13 +1,14 @@
-import { api } from '@/convex/_generated/api';
-import { Id } from '@/convex/_generated/dataModel'
-import { SignInButton, useUser } from '@clerk/nextjs';
-import { useMutation, useQuery } from 'convex/react';
-import { MessageSquare } from 'lucide-react';
-import { useState } from 'react';
-import Comment from "./Comment"
-import toast from 'react-hot-toast';
-import CommentForm from './CommentForm';
+import { SignInButton, useUser } from "@clerk/nextjs";
 
+import { useState } from "react";
+import { useMutation, useQuery } from "convex/react";
+
+import toast from "react-hot-toast";
+import { MessageSquare } from "lucide-react";
+import Comment from "./Comment";
+import CommentForm from "./CommentForm";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 
 function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
   const { user } = useUser();
@@ -18,9 +19,9 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
   const addComment = useMutation(api.snippets.addComment);
   const deleteComment = useMutation(api.snippets.deleteComment);
 
-
   const handleSubmitComment = async (content: string) => {
     setIsSubmitting(true);
+
     try {
       await addComment({ snippetId, content });
     } catch (error) {
@@ -43,6 +44,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
       setDeletingCommentId(null);
     }
   };
+
   return (
     <div className="bg-[#121218] border border-[#ffffff0a] rounded-2xl overflow-hidden">
       <div className="px-6 sm:px-8 py-6 border-b border-[#ffffff0a]">
@@ -51,6 +53,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
           Discussion ({comments.length})
         </h2>
       </div>
+
       <div className="p-6 sm:p-8">
         {user ? (
           <CommentForm onSubmit={handleSubmitComment} isSubmitting={isSubmitting} />
@@ -78,7 +81,6 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default Comments
+export default Comments;
