@@ -41,7 +41,8 @@ function CommentForm({ onSubmit, isSubmitting }: CommentFormProps) {
         {isPreview ? (
 
           <div className="min-h-[120px] p-4 text-[#e1e1e3">
-            <CommentContent  content={content} />
+            <CommentContent content={comment} />
+
           </div>
         ) : (
           <textarea
