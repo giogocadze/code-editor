@@ -10,8 +10,8 @@ import ProfileHeaderSkeleton from "./_components/ProfileHeaderSkeleton";
 import ProfileHeader from "./_components/ProfileHeader";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, Code, ListVideo, Loader2, Star } from "lucide-react";
-import CodeBlock from "../snippets/[id]/_components/CodeBlock";
 import Image from "next/image";
+import CodeBlock from "./_components/CodeBlock";
 const TABS = [
   {
     id: "executions",
