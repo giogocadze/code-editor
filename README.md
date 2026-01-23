@@ -56,14 +56,6 @@ Built with a production-ready stack and designed for scalability, performance, a
 
 ---
 
-## 🔐 Authentication & Security
-
-- Secure authentication and session management via Clerk
-- Server-side validation for execution requests
-- Safe, sandboxed code execution environment
-
----
-
 ## 📦 Environment Setup
 
 ```bash
