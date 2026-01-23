@@ -5,6 +5,9 @@ import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import NavigationHeader from "../components/NavigationHeader";
+import ProfileHeaderSkeleton from "./_components/ProfileHeaderSkeleton";
+import ProfileHeader from "./_components/ProfileHeader";
 
 function ProfilePage() {
     const { user, isLoaded } = useUser();
@@ -37,8 +40,15 @@ function ProfilePage() {
         if (executionStatus === "CanLoadMore") loadMore(5);
     };
     return (
-        <div>
+        <div className="min-h-screen bg-[#0a0a0f]">
+            <NavigationHeader />
+            <div className="max-w-7xl mx-auto px-4 py-12">
+                {userStats && userData && (
+                    <ProfileHeader userStats={userStats} userData={userData} user={user!} />
+                )}
 
+                {(userStats === undefined || !isLoaded) && <ProfileHeaderSkeleton />}
+            </div>
         </div>
     )
 }
