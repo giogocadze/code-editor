@@ -9,6 +9,8 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Star } from "lucide-react";
 import FeatureCategory from "./_components/FeatureCategory";
 import FeatureItem from "./_components/FeatureItem";
+import UpgradeButton from "./_components/UpgradeButton";
+import LoginButton from "../components/LoginButton";
 
 async function page() {
   const user = await currentUser();
@@ -113,8 +115,7 @@ async function page() {
                   </FeatureCategory>
                 </div>
 
-                {/* CTA */}
-                {/* <div className="flex justify-center">
+                <div className="flex justify-center">
                   <SignedIn>
                     <UpgradeButton />
                   </SignedIn>
@@ -122,7 +123,7 @@ async function page() {
                   <SignedOut>
                     <LoginButton />
                   </SignedOut>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
