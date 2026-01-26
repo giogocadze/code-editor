@@ -52,8 +52,6 @@ Built with a production-ready stack and designed for scalability, performance, a
 ### Pro Plan
 - Increased execution limits
 - Full access to advanced features
-- Priority experience
-
 ---
 
 ## 📦 Environment Setup
